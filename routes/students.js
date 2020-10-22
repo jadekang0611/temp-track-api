@@ -17,4 +17,15 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+// GET A SPECIFIC STUDENT by Phone Number
+router.get('/:studentId', async (req, res, next) => {
+  const query = { phone_number: req.params.studentId };
+  try {
+    const student = await Student.findOne(query);
+    res.status(200).json(student);
+  } catch (e) {
+    res.status(500).json({ message: e });
+  }
+});
+
 module.exports = router;
