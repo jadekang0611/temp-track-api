@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use('/students', studentsRoute);
 
 app.get('/', (req, res, next) => {
-  res.send('We are home');
+  res.send('Hello World');
 });
 
 // Connect to DB
