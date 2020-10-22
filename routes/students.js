@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
 
 // GET A SPECIFIC STUDENT by Phone Number
 router.get('/:studentId', async (req, res, next) => {
-  const query = { phone_number: req.params.studentId };
+  const query = { _id: req.params.studentId };
   try {
     const student = await Student.findOne(query);
     res.status(200).json(student);
@@ -55,6 +55,32 @@ router.delete('/:studentId', async (req, res, next) => {
       _id: req.params.studentId,
     });
     res.status(200).json(removedStudent);
+  } catch (e) {
+    res.status(500).json({ message: e });
+  }
+});
+
+// UPDATE A STUDENT
+router.patch('/:studentId', async (req, res, next) => {
+  const query = { _id: req.params.studentId };
+
+  let obj = {};
+  const grade = req.body.grade;
+  const phone_number = req.body.phone_number;
+  const school = req.body.school;
+  const address = req.body.address;
+  
+  grade ? (obj.grade = grade) : '';
+  phone_number ? (obj.phone_number = phone_number) : '';
+  school ? (obj.school = school) : '';
+  address ? (obj.address = address) : '';
+
+  const set = {
+    $set: obj,
+  };
+  try {
+    const updatedStudent = await Student.updateOne(query, set);
+    res.status(200).json(updatedStudent);
   } catch (e) {
     res.status(500).json({ message: e });
   }
