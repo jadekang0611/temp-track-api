@@ -8,6 +8,7 @@ const Log = require('../models/Log');
 
 // GET ALL LOGS
 router.get('/', async (req, res, next) => {
+  console.log('test');
   try {
     const logs = await Log.find();
     res.status(200).json(logs);
@@ -16,7 +17,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// GET A SPECIFIC Students' logs
+// GET A SPECIFIC Students' logs by StudentID
 router.get('/:studentId', async (req, res, next) => {
   const query = { student_id: req.params.studentId };
   try {
@@ -27,6 +28,20 @@ router.get('/:studentId', async (req, res, next) => {
       { $sort: { date_time: 1 } },
     ]);
     res.status(200).json(logGroup);
+  } catch (e) {
+    res.status(500).json({ message: e });
+  }
+});
+
+// GET LOGS BY DATE
+router.get('/date/:date', async (req, res, next) => {
+  const query2 = { date_time: new Date(req.params.date) };
+  try {
+    const logGroup2 = await Log.aggregate([
+      { $match: query2 },
+      { $sort: { name: 1 } },
+    ]);
+    res.status(200).json(logGroup2);
   } catch (e) {
     res.status(500).json({ message: e });
   }
