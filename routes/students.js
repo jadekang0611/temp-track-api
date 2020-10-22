@@ -28,4 +28,24 @@ router.get('/:studentId', async (req, res, next) => {
   }
 });
 
+// CREATE A STUDENT
+router.post('/', async (req, res, next) => {
+  const student = new Student({
+    name: req.body.name,
+    dob: req.body.dob,
+    address: req.body.address,
+    group: req.body.group,
+    grade: req.body.grade,
+    school: req.body.school,
+    phone_number: req.body.phone_number,
+    parent: req.body.parent,
+  });
+  try {
+    const savedStudent = await student.save();
+    res.status(200).json(savedStudent);
+  } catch (e) {
+    res.status(500).json({ message: e });
+  }
+});
+
 module.exports = router;
