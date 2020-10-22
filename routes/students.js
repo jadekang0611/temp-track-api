@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// GET A SPECIFIC STUDENT by Phone Number
+// GET A SPECIFIC STUDENT by id
 router.get('/:studentId', async (req, res, next) => {
   const query = { _id: req.params.studentId };
   try {
@@ -69,7 +69,7 @@ router.patch('/:studentId', async (req, res, next) => {
   const phone_number = req.body.phone_number;
   const school = req.body.school;
   const address = req.body.address;
-  
+
   grade ? (obj.grade = grade) : '';
   phone_number ? (obj.phone_number = phone_number) : '';
   school ? (obj.school = school) : '';
