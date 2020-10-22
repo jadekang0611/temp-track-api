@@ -12,12 +12,14 @@ const bodyParser = require('body-parser');
 
 // Import routes
 const studentsRoute = require('./routes/students');
+const logsRoute = require('./routes/logs');
 
 // Middlewares
 app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/students', studentsRoute);
+app.use('/logs', logsRoute);
 
 app.get('/', (req, res, next) => {
   res.send('Hello World');
