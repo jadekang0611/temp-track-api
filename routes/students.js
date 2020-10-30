@@ -9,6 +9,7 @@ const Student = require('../models/Student');
 // GET ALL THE STUDENTS
 
 router.get('/', async (req, res, next) => {
+  console.log("get students");
   try {
     const students = await Student.find();
     res.status(200).json(students);

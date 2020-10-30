@@ -25,7 +25,7 @@ const StudentSchema = mongoose.Schema({
     required: true,
   },
   grade: {
-    type: Number,
+    type: String,
     required: true,
   },
   school: {
@@ -33,7 +33,7 @@ const StudentSchema = mongoose.Schema({
     required: true,
   },
   phone_number: {
-    type: Number,
+    type: String,
     required: true,
   },
   parent: {
@@ -42,7 +42,7 @@ const StudentSchema = mongoose.Schema({
       required: true,
     },
     parent_number: {
-      type: Number,
+      type: String,
       required: true,
     },
   },

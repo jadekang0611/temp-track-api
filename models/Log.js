@@ -10,9 +10,6 @@ const LogSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  high_fever: {
-    type: Boolean,
-  },
   date_time: {
     type: Date,
     default: Date.now,
