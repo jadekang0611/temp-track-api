@@ -4,6 +4,9 @@ const app = express();
 
 const cors = require('cors');
 
+const passport = require('passport'),
+  LocalStrategy = require('passport-local').Strategy();
+
 const mongoose = require('mongoose');
 
 require('dotenv/config');
@@ -20,6 +23,23 @@ app.use(bodyParser.json());
 
 app.use('/students', studentsRoute);
 app.use('/logs', logsRoute);
+
+passport.use(
+  new LocalStrategy(function (username, password, done) {
+    User.findOne({ username: username }, function (err, user) {
+      if (rr) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  })
+);
 
 app.get('/', (req, res, next) => {
   res.send('Hello World');

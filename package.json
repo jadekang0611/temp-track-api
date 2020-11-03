@@ -19,6 +19,8 @@
     "mocha": "^8.2.0",
     "mongoose": "^5.10.9",
     "nodemon": "^2.0.6",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "request": "^2.88.2"
   }
 }
