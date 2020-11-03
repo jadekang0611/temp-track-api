@@ -4,10 +4,6 @@ const dayJS = require('dayjs');
 
 // IMPORT THE LOG MODEL
 const Log = require('../models/Log');
-const dayjs = require('dayjs');
-
-// Get today's date and time
-const now = dayjs();
 
 // ROUTES
 
@@ -41,10 +37,14 @@ router.get('/:studentId', async (req, res, next) => {
 // GET LOGS BY DATE RANGE
 router.post('/date', async (req, res, next) => {
   const firstDate = new Date(req.body.firstDate);
-  const secondDate = new Date(req.body.secondDate);
+  let secondDate = new Date(req.body.secondDate);
 
   try {
-    secondDate === null ? (secondDate = now) : secondDate;
+    if (secondDate.toString() === 'Invalid Date') {
+      secondDate = new Date();
+    } else {
+      secondDate;
+    }
     const logGroup2 = await Log.aggregate([
       {
         $match: {
