@@ -9,7 +9,7 @@ const Student = require('../models/Student');
 // GET ALL THE STUDENTS
 
 router.get('/', async (req, res, next) => {
-  console.log("get students");
+  console.log('get students');
   try {
     const students = await Student.find();
     res.status(200).json(students);
@@ -31,6 +31,7 @@ router.get('/:studentId', async (req, res, next) => {
 
 // CREATE A STUDENT
 router.post('/', async (req, res, next) => {
+  console.log(req.body);
   const student = new Student({
     name: req.body.name,
     dob: req.body.dob,

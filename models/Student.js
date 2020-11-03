@@ -8,21 +8,21 @@ const StudentSchema = mongoose.Schema({
   },
   dob: {
     type: Date,
-    required: true,
+    required: false,
   },
   address: {
     dong: {
       type: String,
-      required: true,
+      required: false,
     },
     city: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   group: {
     type: Number,
-    required: true,
+    required: false,
   },
   grade: {
     type: String,
@@ -34,7 +34,7 @@ const StudentSchema = mongoose.Schema({
   },
   phone_number: {
     type: String,
-    required: true,
+    required: false,
   },
   parent: {
     parent_name: {

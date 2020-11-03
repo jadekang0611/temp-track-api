@@ -14,6 +14,10 @@ const LogSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  address: {
+    type: String,
+    required: false,
+  },
   student_id: {
     type: String,
     required: true,
