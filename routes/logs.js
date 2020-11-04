@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const dayJS = require('dayjs');
+const verify = require('./verifyToken');
+
+// verify will be used as a middleware to routes to make them protected routes.
 
 // IMPORT THE LOG MODEL
 const Log = require('../models/Log');
@@ -8,7 +11,7 @@ const Log = require('../models/Log');
 // ROUTES
 
 // GET ALL LOGS
-router.get('/', async (req, res, next) => {
+router.get('/', verify, async (req, res, next) => {
   console.log('test');
   try {
     const logs = await Log.find();
@@ -19,7 +22,7 @@ router.get('/', async (req, res, next) => {
 });
 
 // GET A SPECIFIC Students' logs by StudentID
-router.get('/:studentId', async (req, res, next) => {
+router.get('/:studentId', verify, async (req, res, next) => {
   const query = { student_id: req.params.studentId };
   try {
     // const logGroup = await Log.find(query);
@@ -35,7 +38,7 @@ router.get('/:studentId', async (req, res, next) => {
 });
 
 // GET LOGS BY DATE RANGE
-router.post('/date', async (req, res, next) => {
+router.post('/date', verify, async (req, res, next) => {
   const firstDate = new Date(req.body.firstDate);
   let secondDate = new Date(req.body.secondDate);
 
@@ -63,7 +66,7 @@ router.post('/date', async (req, res, next) => {
 });
 
 // CREATE A NEW LOG
-router.post('/', async (req, res, next) => {
+router.post('/', verify, async (req, res, next) => {
   const log = new Log({
     name: req.body.name,
     temperature: req.body.temperature,
