@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const verify = require('./verifyToken');
+const verify = require('./check-auth');
 
 // IMPORT MY MODEL
 const Student = require('../models/Student');
@@ -9,7 +9,7 @@ const Student = require('../models/Student');
 
 // GET ALL THE STUDENTS
 
-router.get('/', verify, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   console.log('get students');
   try {
     const students = await Student.find();
@@ -31,7 +31,7 @@ router.get('/:studentId', async (req, res, next) => {
 });
 
 // CREATE A STUDENT
-router.post('/', verify, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   console.log(req.body);
   const student = new Student({
     name: req.body.name,

@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-const auth = (req, res, next) => {
+module.exports = (req, res, next) => {
   const token = req.header('auth-token');
+
   if (!token) return res.status(401).send('Access Denied');
 
   try {
@@ -14,4 +15,3 @@ const auth = (req, res, next) => {
 };
 
 // This middleware is used to make specific routes protected.
-module.exports = auth;

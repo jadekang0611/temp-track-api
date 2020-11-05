@@ -16,8 +16,8 @@ const logsRoute = require('./routes/logs');
 const authRoute = require('./routes/auth');
 
 // Middlewares
-app.use(cors());
 app.use(bodyParser.json());
+app.use(cors());
 
 // Route Middlewares
 app.use('/students', studentsRoute);
